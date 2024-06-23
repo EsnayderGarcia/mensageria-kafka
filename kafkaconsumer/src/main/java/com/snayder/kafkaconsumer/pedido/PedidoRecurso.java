@@ -10,19 +10,14 @@ import java.util.List;
 @RestController
 @RequestMapping("v1/consumer/pedidos")
 public class PedidoRecurso {
-    private final PedidoRepositorio pedidoRepositorio;
+    private final PedidoServico pedidoServico;
 
-    public PedidoRecurso(PedidoRepositorio pedidoRepositorio) {
-        this.pedidoRepositorio = pedidoRepositorio;
+    public PedidoRecurso(PedidoServico pedidoServico) {
+        this.pedidoServico = pedidoServico;
     }
 
     @GetMapping
     public ResponseEntity<List<PedidoDto>> busca() {
-        return ResponseEntity.ok(
-            pedidoRepositorio.findAll()
-                .stream()
-                .map(PedidoDto::new)
-                .toList()
-        );
+        return ResponseEntity.ok(pedidoServico.busca());
     }
 }
